@@ -20,7 +20,7 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
-      - name: Running ${{env.environment}} S ${{secrets.MY_SECRET}}
+      - name: Running ${{env.environment}} S ${{secrets.MY_SECRET}} y ${{vars.MY_VAR}} x ${{vars.MY_ENV}}
         run: echo $environment ${{env.environment}} Secret ${{secrets.MY_SECRET}}
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v4
