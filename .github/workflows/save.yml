@@ -1,0 +1,26 @@
+name: 'Save Dist'
+run-name: ${{github.actor}} is Saving
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  RunBuild:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test Echo
+        run: echo Hello World
+      - name: Use Node.js ${{matrix.node-version}}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
