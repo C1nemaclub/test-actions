@@ -1,5 +1,5 @@
 name: 'Save Dist'
-run-name: ${{github.actor}} is Saving
+run-name: ${{github.actor}} is Saving on ${{ github.head_ref || github.ref_name }}
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
       - dev
 env:
   environment: TESSSt 👽👽👽
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   RunBuild:
