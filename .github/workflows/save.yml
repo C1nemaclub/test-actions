@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Running
-        run: echo ${{env.environment}}
+        run: echo $environment
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v4
         with:
