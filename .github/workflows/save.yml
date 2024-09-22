@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Running $environment
-        run: echo $environment ${{env.environment}} ${{secrets.MY_SECRET}}
+        run: echo $environment ${{env.environment}} Secret> ${{secrets.MY_SECRET}}
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v4
         with:
