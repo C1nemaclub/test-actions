@@ -9,6 +9,8 @@ on:
 
 jobs:
   RunBuild:
+    env:
+      environment: $MY_SECRET
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,3 +33,4 @@ jobs:
           path: |
             dist
             !dist/**/*.md
+          overwrite: true
