@@ -15,7 +15,7 @@ env:
 jobs:
   RunBuild:
     environment:
-      name: ${{ github.ref_name == 'master' && 'production' || 'dev' }}
+      name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
