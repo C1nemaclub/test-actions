@@ -28,7 +28,7 @@ jobs:
       - run: npm run build --if-present
       - name: Create Environment File
         run: |
-          chmod +x ../populate-env.sh
+          chmod +x .github/populate-env.sh
         shell: bash
       - name: Read Environment File
         run: |
