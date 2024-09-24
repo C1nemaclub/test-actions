@@ -10,12 +10,12 @@ on:
 env:
   environment: TESSSt 👽👽👽
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-  CURRENT_ENV:
+  CURRENT_ENV: ${{ github.ref_name == 'master' && 'production' || 'dev' }}
 
 jobs:
   RunBuild:
     environment:
-      name: dev
+      name: ${{env.environment}}
     runs-on: ubuntu-latest
     strategy:
       matrix:
