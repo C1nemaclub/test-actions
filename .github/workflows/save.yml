@@ -14,7 +14,8 @@ env:
 
 jobs:
   RunBuild:
-    environment: dev
+    environment:
+      name: dev
     runs-on: ubuntu-latest
     strategy:
       matrix:
