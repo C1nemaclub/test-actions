@@ -15,7 +15,7 @@ env:
 jobs:
   RunBuild:
     env:
-      environment: ${{ inputs.environment }}
+      environment: dev
     runs-on: ubuntu-latest
     strategy:
       matrix:
