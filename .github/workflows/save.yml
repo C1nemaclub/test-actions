@@ -1,24 +1,29 @@
 name: 'Save Dist'
-run-name: ${{github.actor}} is Saving
+run-name: ${{github.actor}} is Saving on ${{ github.head_ref || github.ref_name }}
 
 on:
   push:
     branches:
       - master
       - main
+      - dev
 env:
-  environment: ${{vars.MY_ENV}}
+  environment: TESSSt 👽👽👽
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  CURRENT_ENV: ${{ github.ref_name == 'master' && 'production' || 'dev' }}
 
 jobs:
   RunBuild:
+    environment:
+      name: ${{ github.ref_name == 'master' && 'production' || 'dev' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
-      - name: Running
-        run: echo $environment
+      - name: Running ${{vars.MY_ENV}}
+        run: echo $environment ${{env.environment}}
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v4
         with:
@@ -29,7 +34,7 @@ jobs:
       - name: Archive Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist-without-markdown
+          name: dist-${{ github.head_ref || github.ref_name }}
           path: |
             dist
             !dist/**/*.md
