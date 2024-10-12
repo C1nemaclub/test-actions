@@ -1,5 +1,5 @@
 name: 'Save Dist'
-run-name: ${{github.actor}} is running an action at ${{ github.head_ref || github.ref_name }}
+run-name: ${{github.actor}} is running an action at ${{ env.dist-name }}
 
 on:
   push:
