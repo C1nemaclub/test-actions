@@ -36,19 +36,9 @@ jobs:
 
         shell: bash
 
-      - name: Create Environment File
-        run: |
-          chmod +x .github/populate-env.sh
-        shell: bash
-
       - name: Read Available files
         run: |
           ls -la
-        shell: bash
-
-      - name: Read Environment File
-        run: |
-          more .env
         shell: bash
 
       - name: Archive Artifact
