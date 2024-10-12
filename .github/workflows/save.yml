@@ -44,9 +44,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           name: dist-${{ github.head_ref || github.ref_name }}
-          path: |
-            dist
-            !dist/**/*.md
+          path: dist
 
   deploy:
     needs: RunBuild
