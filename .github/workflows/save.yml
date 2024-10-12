@@ -20,8 +20,7 @@ env:
 jobs:
   RunBuild:
     environment:
-      name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
-      # name: ${{ github.event.inputs.environment }}
+      name: ${{ github.event.inputs.environment || (github.ref_name == 'master' && 'master' || 'dev') }}
 
     runs-on: ubuntu-latest
     env:
