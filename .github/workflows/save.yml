@@ -12,6 +12,8 @@ jobs:
     environment:
       name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
     runs-on: ubuntu-latest
+    env:
+      VITE_ENV: ${{ vars.VITE_ENV }}
     strategy:
       matrix:
         node-version: [20.x]
