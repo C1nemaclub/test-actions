@@ -64,4 +64,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact-name: dist-${{ github.head_ref || github.ref_name }}
+          artifact_name: dist-${{ github.head_ref || github.ref_name }}
