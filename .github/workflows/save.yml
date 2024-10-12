@@ -6,6 +6,8 @@ on:
     branches:
       - master
       - dev
+env:
+  dist-name: dist-${{ github.head_ref || github.ref_name }}
 
 jobs:
   RunBuild:
@@ -58,7 +60,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          name: dist-${{ github.head_ref || github.ref_name }}
+          name: $dist-name
           path: dist
 
   deploy:
@@ -76,4 +78,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: dist-${{ github.head_ref || github.ref_name }}
+          artifact_name: $dist-name
