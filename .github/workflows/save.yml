@@ -60,7 +60,7 @@ jobs:
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          name: $dist-name
+          name: ${{ env.dist-name }}
           path: dist
 
   deploy:
@@ -78,4 +78,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: $dist-name
+          artifact_name: ${{ env.dist-name }}
