@@ -25,6 +25,17 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
 
+      - name: Remove Symlinks
+        run: |
+          find dist -type l -exec rm -f {} \;
+          find dist -name ".*" -exec rm -rf {} \;
+
+      - name: List dist contents
+        run: |
+          ls -la dist
+
+        shell: bash
+
       - name: Create Environment File
         run: |
           chmod +x .github/populate-env.sh
