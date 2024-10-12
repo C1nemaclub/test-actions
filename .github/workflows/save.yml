@@ -15,7 +15,7 @@ on:
         type: environment
 
 env:
-  dist-name: dist-${{ github.head_ref || github.ref_name }}
+  dist-name: dist-${{ github.event.inputs.environment || (github.head_ref || github.ref_name) }}
 
 jobs:
   RunBuild:
