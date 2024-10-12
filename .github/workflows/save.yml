@@ -56,11 +56,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: dist-${{ github.head_ref || github.ref_name }}
-          path: |
-            dist
-            !dist/**/*.md
-            !dist/tests/** # Exclude test files
-            !dist/**/*.map # Exclude source maps if not needed
+          path: dist
 
   deploy:
     needs: RunBuild
