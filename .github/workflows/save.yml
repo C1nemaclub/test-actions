@@ -36,13 +36,24 @@ jobs:
 
         shell: bash
 
+      - name: Create Environment File
+        run: |
+          chmod +x .github/populate-env.sh
+        shell: bash
+
       - name: Read Available files
         run: |
           ls -la
         shell: bash
 
+      - name: Read Environment File
+        run: |
+          more .env
+        shell: bash
+
       - name: Archive Artifact
-        uses: actions/upload-artifact@v4
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
           name: dist-${{ github.head_ref || github.ref_name }}
           path: |
@@ -50,7 +61,6 @@ jobs:
             !dist/**/*.md
             !dist/tests/** # Exclude test files
             !dist/**/*.map # Exclude source maps if not needed
-          overwrite: true
 
   deploy:
     needs: RunBuild
