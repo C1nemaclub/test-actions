@@ -47,7 +47,6 @@ jobs:
           path: |
             dist
             !dist/**/*.md
-          overwrite: true
 
   deploy:
     needs: RunBuild
