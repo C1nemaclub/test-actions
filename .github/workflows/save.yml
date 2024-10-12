@@ -6,6 +6,14 @@ on:
     branches:
       - master
       - dev
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: environment
+
 env:
   dist-name: dist-${{ github.head_ref || github.ref_name }}
 
@@ -30,18 +38,11 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
 
-      - name: Extract Version
-        id: extract_version
-        run: |
-          MANIFEST_VERSION=$(jq -r ".version" package.json)
-          echo "MANIFEST_VERSION=$MANIFEST_VERSION" >> $GITHUB_ENV
-        shell: bash
-
       - name: Archive Artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          name: ${{ env.dist-name }}-${{env.MANIFEST_VERSION}}
+          name: ${{ env.dist-name }}
           path: dist
 
   deploy:
@@ -59,4 +60,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: ${{ env.dist-name }}-${{env.MANIFEST_VERSION}}
+          artifact_name: ${{ env.dist-name }}
