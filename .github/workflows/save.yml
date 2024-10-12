@@ -48,6 +48,7 @@ jobs:
             dist
             !dist/**/*.md
           overwrite: true
+
   deploy:
     needs: RunBuild
     permissions:
@@ -57,7 +58,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact-name: dist-${{ github.head_ref || github.ref_name }}
