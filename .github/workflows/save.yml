@@ -1,5 +1,5 @@
 name: 'Save Dist'
-run-name: ${{github.actor}} is running an action at ${{ env.dist-name }}
+run-name: ${{github.actor}} is running an action at ${{ github.head_ref || github.ref_name }}
 
 on:
   push:
@@ -30,37 +30,18 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
 
-      - name: Remove Symlinks
+      - name: Extract Version
+        id: extract_version
         run: |
-          find dist -type l -exec rm -f {} \;
-          find dist -name ".*" -exec rm -rf {} \;
-
-      - name: List dist contents
-        run: |
-          ls -la dist
-
-        shell: bash
-
-      - name: Create Environment File
-        run: |
-          chmod +x .github/populate-env.sh
-        shell: bash
-
-      - name: Read Available files
-        run: |
-          ls -la
-        shell: bash
-
-      - name: Read Environment File
-        run: |
-          more .env
+          MANIFEST_VERSION=$(jq -r ".version" package.json)
+          echo "MANIFEST_VERSION=$MANIFEST_VERSION" >> $GITHUB_ENV
         shell: bash
 
       - name: Archive Artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          name: ${{ env.dist-name }}
+          name: ${{ env.dist-name }}-${{env.MANIFEST_VERSION}}
           path: dist
 
   deploy:
@@ -78,4 +59,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: ${{ env.dist-name }}
+          artifact_name: ${{ env.dist-name }}-${{env.MANIFEST_VERSION}}
