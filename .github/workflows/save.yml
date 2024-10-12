@@ -7,10 +7,22 @@ on:
       - master
       - dev
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        type: environment
+
+env:
+  dist-name: dist-${{ github.head_ref || github.ref_name }}
+
 jobs:
   RunBuild:
     environment:
       name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
+      # name: ${{ github.event.inputs.environment }}
+
     runs-on: ubuntu-latest
     env:
       VITE_ENV: ${{ vars.VITE_ENV }}
@@ -28,37 +40,11 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
 
-      - name: Remove Symlinks
-        run: |
-          find dist -type l -exec rm -f {} \;
-          find dist -name ".*" -exec rm -rf {} \;
-
-      - name: List dist contents
-        run: |
-          ls -la dist
-
-        shell: bash
-
-      - name: Create Environment File
-        run: |
-          chmod +x .github/populate-env.sh
-        shell: bash
-
-      - name: Read Available files
-        run: |
-          ls -la
-        shell: bash
-
-      - name: Read Environment File
-        run: |
-          more .env
-        shell: bash
-
       - name: Archive Artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          name: dist-${{ github.head_ref || github.ref_name }}
+          name: ${{ env.dist-name }}
           path: dist
 
   deploy:
@@ -76,4 +62,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: dist-${{ github.head_ref || github.ref_name }}
+          artifact_name: ${{ env.dist-name }}
