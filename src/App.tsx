@@ -6,6 +6,9 @@ import viteLogo from '/vite.svg';
 function App() {
   const [count, setCount] = useState(0);
   const env = import.meta.env.VITE_ENV;
+  const secret = import.meta.env.VITE_SECRET;
+  console.log(secret);
+  console.log(env);
 
   return (
     <>
