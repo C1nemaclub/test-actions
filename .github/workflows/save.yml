@@ -20,7 +20,9 @@ env:
 jobs:
   RunBuild:
     environment:
-      name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
+      # name: ${{ github.ref_name == 'master' && 'master' || 'dev' }}
+      name: ${{ github.event.inputs.environment }}
+
     runs-on: ubuntu-latest
     env:
       VITE_ENV: ${{ vars.VITE_ENV }}
