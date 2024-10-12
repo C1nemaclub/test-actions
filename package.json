@@ -2,7 +2,7 @@
   "name": "test-actions",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://C1nemaclub.github.io/test-actions",
+  "homepage": ".",
   "type": "module",
   "scripts": {
     "dev": "vite",
