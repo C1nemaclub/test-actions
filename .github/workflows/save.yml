@@ -76,7 +76,7 @@ jobs:
         run: ls -lah
 
       - name: Download dist folder artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.dist-name }}
 
