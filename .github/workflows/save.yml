@@ -80,6 +80,12 @@ jobs:
       - name: List files
         run: ls -lah
 
+      - name: npm install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
         with:
