@@ -80,12 +80,6 @@ jobs:
       - name: Extract artifact
         run: tar -xvf artifact.tar
 
-      - name: npm install
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
       - name: List files
         run: ls -lah
 
