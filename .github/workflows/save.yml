@@ -66,6 +66,8 @@ jobs:
     needs: RunBuild
     runs-on: ubuntu-latest
     steps:
+      - name: List files
+        run: ls -l
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
         with:
