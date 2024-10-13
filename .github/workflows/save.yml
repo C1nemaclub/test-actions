@@ -70,18 +70,19 @@ jobs:
     needs: RunBuild
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Download dist folder artifact
-        uses: actions/download-artifact@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          name: ${{ env.dist-name }}
+          node-version: '20.x'
 
-      - name: Extract artifact
-        run: tar -xvf artifact.tar
+      - name: Install dependencies
+        run: npm install
 
-      - name: List files
-        run: ls -lah
+      - name: Build app
+        run: npm run build
 
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
