@@ -72,13 +72,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: List files
-        run: ls -lah
-
       - name: Download dist folder artifact
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.dist-name }}
+
+      - name: List files
+        run: ls -lah
 
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
