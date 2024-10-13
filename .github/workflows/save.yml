@@ -77,14 +77,17 @@ jobs:
         with:
           name: ${{ env.dist-name }}
 
-      - name: List files
-        run: ls -lah
+      - name: Extract artifact
+        run: tar -xvf artifact.tar
 
       - name: npm install
         run: npm install
 
       - name: Build
         run: npm run build
+
+      - name: List files
+        run: ls -lah
 
       - uses: actions/checkout@master
       - uses: jakejarvis/s3-sync-action@master
